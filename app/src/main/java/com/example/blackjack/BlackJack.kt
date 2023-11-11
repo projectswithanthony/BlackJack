@@ -1,8 +1,17 @@
 package com.example.blackjack
 
 import java.util.Random
+import java.util.Scanner
 
 class BlackJack {
+
+    @JvmField
+    var playingFlag = true // if 'q' quits game
+    @JvmField
+    var isStanding = false
+    @JvmField
+    var resetValue = false
+
     @JvmField
     var playerScore = 0
     @JvmField
@@ -20,6 +29,8 @@ class BlackJack {
     init {
         playerHand = ArrayList()
         compHand = ArrayList()
+
+
         dealCardComp(generateRandom())
         dealCardComp(generateRandom())
         dealCardPlayer(generateRandom())
