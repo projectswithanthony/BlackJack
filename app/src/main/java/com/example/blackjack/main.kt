@@ -3,7 +3,7 @@ package com.example.blackjack
 import java.util.Scanner
 
 class main {
-    init {
+    fun work() {
         var game = BlackJack()
 
         // Game While Loop
@@ -144,5 +144,9 @@ class main {
                 }
             }
         }
+    }
+
+    init {
+
     }
 }
