@@ -85,17 +85,17 @@ class main {
     PLAYER SUM: ${game.playerHandSum}
     """.trimIndent()
                     )
-                    val outcome = game.compareHands()
-
-                    // 0 - Player, 1 - Computer, 2 - Draw
-                    if (outcome == 2) {
-                        println("IT WAS A DRAW :/")
-                    } else if (outcome == 1) {
-                        println("THE COMPUTER WON :(")
-                    } else {
-                        println("THE PLAYER WON :)")
-                    }
-                    resetValue = true
+//                    val outcome = game.compareHands()
+//
+//                    // 0 - Player, 1 - Computer, 2 - Draw
+//                    if (outcome == 2) {
+//                        println("IT WAS A DRAW :/")
+//                    } else if (outcome == 1) {
+//                        println("THE COMPUTER WON :(")
+//                    } else {
+//                        println("THE PLAYER WON :)")
+//                    }
+//                    resetValue = true
                 } else {
 
                     // Computers Choice

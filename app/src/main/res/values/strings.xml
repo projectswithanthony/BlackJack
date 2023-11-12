@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">BlackJack</string>
     <string name="hit">Hit</string>
+    <string name="stand">Stand</string>
+    <string name="playerhand">PlayerHand</string>
+    <string name="computerhand">ComputerHand</string>
+    <string name="computerscore">Computer Score: 0 </string>
+    <string name="player_score">Player Score: 0 </string>
 </resources>

@@ -1,11 +1,15 @@
 package com.example.blackjack
 
+import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat.finishAffinity
 import java.util.Scanner
 
 class MainActivity : AppCompatActivity() {
@@ -16,185 +20,112 @@ class MainActivity : AppCompatActivity() {
 
         val game = BlackJack();
 
-        val hit: Button = findViewById(R.id.hitButton)
+        val hitButton: Button = findViewById(R.id.hitButton)
+        val standButton: Button = findViewById(R.id.standButton)
+
         val playerText: TextView = findViewById(R.id.playerHand)
         val computerText: TextView = findViewById(R.id.computerHand)
 
+        val computerScore: TextView = findViewById(R.id.computerScore)
+        val playerScore: TextView = findViewById(R.id.playerScore)
 
-        hit.setOnClickListener {
-            playTurn(game, playerText, computerText)
-            playerText.setText(game.playerHand.toString())
-            computerText.setText(game.compHand.toString())
+        // Initial Printing of both hands
+        playerText.text = game.printHand(game.playerHand)
+        computerText.text = game.printHandComp(game.compHand)
+
+        // Initial Check For Black Jack Condition
+        checkBlackJack(game, this, this, playerText, computerText, computerScore, playerScore)
+
+
+        // hit Button -- Progresses the game
+        hitButton.setOnClickListener {
+            playTurn(game, playerText, computerText, this, this, computerScore, playerScore)
+        }
+
+        // stand Button -- When player is done playing -- compares hands and such
+        standButton.setOnClickListener {
+            endDialog(this, this, game.compareHands(), game, playerText, computerText, computerScore, playerScore)
         }
     }
 }
 
-fun playTurn(game: BlackJack, playerText: TextView, computerText: TextView) {
-    game.dealCardPlayer(game.generateRandom())
-    game.dealCardComp(game.generateRandom())
-
-    // Copy Paster
+fun checkBlackJack(game: BlackJack, context: Context, activity: Activity, playerText: TextView, computerText: TextView,
+                   computerScore: TextView, playerScore: TextView) {
     if (game.blackJack(game.compHand) && game.blackJack(game.playerHand)) {
-//        println("The Computer Has a hand of: ")
-//        game.printHand(game.compHand)
-//        println()
-//        println("Your Hand is: ")
-//        game.printHand(game.playerHand)
-//        println("")
-//        println("IT WAS A DRAW because of two Black Jack Cases")
-
-        playerText.setText(game.playerHand.toString())
-        computerText.setText(game.compHand.toString())
-
-    } else if (game.blackJack(game.compHand)) {
-//        println("The Computer Has a hand of: ")
-//        game.printHandComp(game.compHand)
-//        println()
-//        println("Your Hand is: ")
-//        game.printHand(game.playerHand)
-//        println("The Computer wins by Black Jack")
-
-        playerText.setText(game.playerHand.toString())
-        computerText.setText(game.compHand.toString())
-
-    } else if (game.blackJack(game.playerHand)) {
-//        println("The Computer Has a hand of: ")
-//        game.printHandComp(game.compHand)
-//        println()
-//        println("Your Hand is: ")
-//        game.printHand(game.playerHand)
-//        println()
-//        println("The Player wins by Black Jack")
-
-        playerText.setText(game.playerHand.toString())
-        computerText.setText(game.compHand.toString())
-
-    } else {
-        while (game.playingFlag) {
-//            println("The Computer Has a hand of: ")
-//            game.printHandComp(game.compHand)
-//            println()
-//            println("Your Hand is: ")
-//            game.printHand(game.playerHand)
-
-            playerText.setText(game.playerHand.toString())
-            computerText.setText(game.compHand.toString())
-
-            // Players Choice
-//            print("\nWould you like to HIT?: (y/n) ")
-//            if (input.nextLine() == "y") game.dealCardPlayer(game.generateRandom()) else isStanding =
-//                true
-            if (game.playerHandSum > 21) {
-//                println("DEALERS FINAL HAND: ")
-//                game.printHand(game.compHand)
-                computerText.setText(game.compHand.toString())
-                println(
-                    """
-
-    COMP SUM: ${game.compHandSum}
-    """.trimIndent()
-                )
-//                println("PLAYERS FINAL HAND: ")
-                playerText.setText(game.playerHand.toString())
-//                println(
-                    """
-
-    PLAYER SUM: ${game.playerHandSum}
-    """.trimIndent()
-////                )
-//                println("\nTHE COMPUTER WINS!")
-                game.computerScore++
-                game.resetValue = true
-            }
-            if (game.isStanding) {
-                // Reveal Dealers cards
-//                println("DEALERS FINAL HAND: ")
-//                game.printHand(game.compHand)
-                playerText.setText(game.playerHand.toString())
-//                println(
-                    """
-
-    COMP SUM: ${game.compHandSum}
-    """.trimIndent()
-//                )
-//                println("PLAYERS FINAL HAND: ")
-//                game.printHand(game.playerHand)
-                playerText.setText(game.playerHand.toString())
-//                println(
-                    """
-
-    PLAYER SUM: ${game.playerHandSum}
-    """.trimIndent()
-//                )
-                val outcome = game.compareHands()
-
-                // 0 - Player, 1 - Computer, 2 - Draw
-                if (outcome == 2) {
-//                    Toast.makeText(applicationContext,"IT WAS A DRAW :/", Toast.LENGTH_SHORT).show()
-                } else if (outcome == 1) {
-//                    Toast.makeText(applicationContext, "THE COMPUTER WON :(", Toast.LENGTH_SHORT).show()
-                } else {
-//                    Toast.makeText(getContext(), "THE PLAYER WON :)", Toast.LENGTH_SHORT).show()
-                }
-                game.resetValue = true
-            } else {
-
-                // Computers Choice
-                if (game.shouldCompHit()) {
-                    game.dealCardComp(game.generateRandom())
-                    if (game.compHandSum > 21) {
-                        computerText.setText(game.compHand.toString())
-//                        game.printHand(game.compHand)
-//                        println(
-                            """
-
-    COMP SUM: ${game.compHandSum}
-    """.trimIndent()
-//                        )
-//                        println("PLAYERS FINAL HAND: ")
-////                        game.printHand(game.playerHand)
-//                        println(
-                        playerText.setText(game.playerHand.toString())
-                            """
-
-    PLAYER SUM: ${game.playerHandSum}
-    """.trimIndent()
-//                        )
-                        println("\nTHE PLAYER WINS!")
-                        game.playerScore++
-                        game.resetValue = !game.resetValue
-                    }
-                }
-//                println("\n")
-            }
-//            if (game.resetValue) {
-//                println()
-//                println("COMPUTER SCORE: " + game.computerScore)
-//                println("PLAYER SCORE: " + game.playerScore)
-//                print("Would You like to play again? (y/n): ")
-//                val choice = input.nextLine()
-//                if (choice == "n") game.playingFlag = false else {
-//                    val ps = game.playerScore
-//                    val cs = game.computerScore
-//                    game = BlackJack()
-//                    game.playerScore = ps
-//                    game.computerScore = cs
-//                    game.isStanding = false
-//                    game.resetValue = false
-//                }
-//                println()
-//            }
-        }
+        endDialog(context, activity, "Both of you", game, playerText, computerText, computerScore, playerScore)
+    }
+    else if (game.blackJack(game.compHand)) {
+        endDialog(context, activity, "Computer", game, playerText, computerText,computerScore,playerScore)
+    }
+    else if (game.blackJack(game.playerHand)) {
+        endDialog(context, activity, "Player", game, playerText, computerText,computerScore,playerScore)
     }
 }
 
-fun updateText(text: String, thing: TextView) {
-    thing.setText(text)
+fun endDialog(context: Context, activity: Activity, winner: String, game: BlackJack, playerText: TextView, computerText: TextView,
+              computerScore: TextView, playerScore: TextView) {
+    val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+    builder
+        .setMessage("The $winner won!\n" +
+                    "Computer's Hand("+ game.compHandSum + "): " + game.printHand(game.compHand) +
+                    "\nYour Hand(" + game.playerHandSum + "): " + game.printHand(game.playerHand))
+        .setTitle("Would You Like to Play Again?")
+        .setPositiveButton("Yes") { dialog, which ->
+            reset(game, playerText, computerText) // Reset game and Screen
+            computerScore.text = "Computer Score: " + game.computerScore
+            playerScore.text = "Player Score: " + game.playerScore
+            dialog.dismiss();
+            checkBlackJack(game, context, activity, playerText, computerText, computerScore, playerScore)
+        }
+        .setNegativeButton("No") { dialog, which ->
+            activity.finish()
+        }
+
+    val dialog: AlertDialog = builder.create()
+    dialog.setCanceledOnTouchOutside(false)
+    dialog.show()
 }
 
-fun updateScreen() {
-
+fun reset(game: BlackJack, playerText: TextView, computerText: TextView) {
+    game.reset()
+    playerText.text = game.printHand(game.playerHand)
+    computerText.text = game.printHandComp(game.compHand)
 }
+
+fun playTurn(game: BlackJack, playerText: TextView, computerText: TextView, context: Context, activity: Activity, computerScore: TextView,
+             playerScore: TextView) {
+
+
+    // Deals next card to Player
+    game.dealCardPlayer(game.generateRandom())
+    playerText.text = game.printHand(game.playerHand)
+
+    // Check to see if player busts
+    if(game.playerHandSum > 21) {
+        endDialog(context, activity, "Computer", game, playerText, computerText, computerScore, playerScore)
+        game.computerScore++;
+        return
+    }
+
+    // Decides if computer takes a card or not
+    if(game.compHandSum < 16) {
+        game.dealCardComp(game.generateRandom())
+        computerText.text = game.printHandComp(game.compHand)
+    }
+
+    // Check to see if computer busts
+    if(game.compHandSum > 21) {
+        endDialog(context, activity, "Player", game, playerText, computerText, computerScore, playerScore)
+        game.playerScore++;
+        return
+    }
+
+    // Check to see if Draw
+    if(game.playerHandSum == game.compHandSum)
+        endDialog(context, activity, "Both of you", game, playerText, computerText, computerScore, playerScore)
+}
+
+
 
 
 

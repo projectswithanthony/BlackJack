@@ -7,48 +7,91 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/TextId"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hello World!"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="@id/hitButton"
-      app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/hitButton"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/TextId"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/playerHand"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@id/computerHand"
+        android:paddingHorizontal="10dp"
+        >
+
+            <TextView
+                android:id="@+id/computerScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@string/computerscore"
+            />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/standButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stand"
+                android:textSize="25sp"
+                />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/hitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hit"
+                android:textSize="25sp"
+                />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/playerScore"
+                android:textSize="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_score"
+                />
+    </LinearLayout>
+
+
+
+
+
 
     <TextView
         android:id="@+id/playerHand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PlayerHand"
+        android:text="@string/playerhand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/hitButton"
+        app:layout_constraintTop_toTopOf="@id/linearLayout"
         />
 
     <TextView
         android:id="@+id/computerHand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ComputerHand"
-        app:layout_constraintBottom_toBottomOf="@id/hitButton"
+        android:text="@string/computerhand"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
+
 
   </androidx.constraintlayout.widget.ConstraintLayout>

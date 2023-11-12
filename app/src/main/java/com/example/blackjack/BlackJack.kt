@@ -37,6 +37,19 @@ class BlackJack {
         dealCardPlayer(generateRandom())
     }
 
+    fun reset()
+    {
+        compHand.removeAll { true }
+        playerHand.removeAll { true }
+        playerHandSum = 0
+        compHandSum = 0
+
+        dealCardComp(generateRandom())
+        dealCardComp(generateRandom())
+        dealCardPlayer(generateRandom())
+        dealCardPlayer(generateRandom())
+    }
+
     fun shouldCompHit(): Boolean {
         return compHandSum < 16
     }
@@ -86,15 +99,15 @@ class BlackJack {
      * Compares the Sums of the hands to check for winner
      * @return 0 - Player, 1 - Computer, 2 - Draw
      */
-    fun compareHands(): Int {
+    fun compareHands(): String {
         return if (playerHandSum == compHandSum) {
-            2
+            "Draw"
         } else if (playerHandSum < compHandSum) {
             computerScore++
-            1
+            "Computer"
         } else {
             playerScore++
-            0
+            "Player"
         }
     }
 
@@ -102,10 +115,14 @@ class BlackJack {
      * Prints out the hand of the inserted List<String>
      * @param hand either the computer or the players hand
     </String> */
-    fun printHand(hand: List<String>) {
+    fun printHand(hand: MutableList<String>): String {
+
+        var handPrint = ""
         for (s in hand) {
-            print("$s ")
+            handPrint += "$s "
         }
+
+        return handPrint;
     }
 
     /**
@@ -113,10 +130,13 @@ class BlackJack {
      * dealers hand until the end of the game.
      * @param hand the computers hand
      */
-    fun printHandComp(hand: List<String>) {
+    fun printHandComp(hand: List<String>): String {
+        var compPrint = ""
         for (i in 1 until hand.size) {
-            print(hand[i] + " ")
+            compPrint += hand[i] + " "
         }
+
+        return compPrint
     }
 
     /**
