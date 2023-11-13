@@ -64,6 +64,10 @@ fun checkBlackJack(game: BlackJack, context: Context, activity: Activity, player
 
 fun endDialog(context: Context, activity: Activity, winner: String, game: BlackJack, playerText: TextView, computerText: TextView,
               computerScore: TextView, playerScore: TextView) {
+    /*change the dealer facedown card to the image of whatever card
+     *it actually is to show user at the end of the game*/
+
+
     val builder: AlertDialog.Builder = AlertDialog.Builder(context)
     builder
         .setMessage("The $winner won!\n" +
@@ -90,6 +94,10 @@ fun reset(game: BlackJack, playerText: TextView, computerText: TextView) {
     game.reset()
     playerText.text = game.printHand(game.playerHand)
     computerText.text = game.printHandComp(game.compHand)
+    /*Have code here where you reset all the image view for user and dealer
+     *You would set the dealer to first card face down then second card up
+     *then show both card for player*/
+
 }
 
 fun playTurn(game: BlackJack, playerText: TextView, computerText: TextView, context: Context, activity: Activity, computerScore: TextView,
@@ -99,6 +107,9 @@ fun playTurn(game: BlackJack, playerText: TextView, computerText: TextView, cont
     // Deals next card to Player
     game.dealCardPlayer(game.generateRandom())
     playerText.text = game.printHand(game.playerHand)
+    /*have code here to put next image in view for player
+     *depending on the card it is get the right image*/
+
 
     // Check to see if player busts
     if(game.playerHandSum > 21) {
@@ -111,6 +122,9 @@ fun playTurn(game: BlackJack, playerText: TextView, computerText: TextView, cont
     if(game.compHandSum < 16) {
         game.dealCardComp(game.generateRandom())
         computerText.text = game.printHandComp(game.compHand)
+        /*make sure to add an image to the dealer next image view
+        *based on the card they take*/
+
     }
 
     // Check to see if computer busts
