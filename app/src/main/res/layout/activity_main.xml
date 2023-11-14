@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/playerHand"
+        app:layout_constraintBottom_toBottomOf="@id/playerLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/computerHand"
+        app:layout_constraintTop_toTopOf="@id/compLayout"
         android:paddingHorizontal="10dp"
         >
 
@@ -65,33 +65,124 @@
     </LinearLayout>
 
 
+<!--    <TextView-->
+<!--        android:id="@+id/playerHand"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/playerhand"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:textSize="30sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@id/linearLayout"-->
+<!--        />-->
 
-
-
-
-    <TextView
-        android:id="@+id/playerHand"
+    <LinearLayout
+        android:id="@+id/playerLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/playerhand"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/linearLayout"
-        />
+        >
 
-    <TextView
-        android:id="@+id/computerHand"
+
+        <ImageView
+            android:id="@+id/p1Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+        <ImageView
+            android:id="@+id/p2Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+        <ImageView
+            android:id="@+id/p3Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+        <ImageView
+            android:id="@+id/p4Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+        <ImageView
+            android:id="@+id/p5Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/compLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/computerhand"
-        android:textSize="30sp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        >
+
+
+        <ImageView
+            android:id="@+id/c1Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+        <ImageView
+            android:id="@+id/c2Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+        <ImageView
+            android:id="@+id/c3Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+        <ImageView
+            android:id="@+id/c4Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+        <ImageView
+            android:id="@+id/c5Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/card_back"
+            />
+
+    </LinearLayout>
+
+
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/computerHand"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/computerhand"-->
+<!--        android:textSize="30sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/linearLayout"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        />-->
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,7 @@ class BlackJack {
     @JvmField
     var playerHandSum = 0
     @JvmField
-    var compHandSum = 0
+    var compHandSum: Int = 0
     @JvmField
     var playerHand: MutableList<String>
     @JvmField
@@ -29,7 +29,6 @@ class BlackJack {
     init {
         playerHand = ArrayList()
         compHand = ArrayList()
-
 
         dealCardComp(generateRandom())
         dealCardComp(generateRandom())
@@ -122,7 +121,7 @@ class BlackJack {
             handPrint += "$s "
         }
 
-        return handPrint;
+        return handPrint
     }
 
     /**
